@@ -362,6 +362,8 @@ body {
   font-size: 0.9em;
   color: white;
   font-weight: bold;
+  right: 10px;
+  position: relative;
 }
 
 .signout-btn {

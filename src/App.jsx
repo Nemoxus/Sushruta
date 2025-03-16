@@ -6,11 +6,13 @@ import SpotifyPlst from "./SpotifyPlst";
 import TextReveal from "./TextReveal";
 import CheckUpBtn from "./CheckUpBtn";
 import SignInBtn from "./SignInBtn";
+import MenuButton from "./MenuButton"; // Import the new animated menu button
 
 function App() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isAuthOpen, setIsAuthOpen] = useState(false);
-  const [user, setUser] = useState(null); // State to track the logged-in user
+  const [isMenuOpen, setIsMenuOpen] = useState(false); // Track menu state
+  const [user, setUser] = useState(null); // Track the logged-in user
 
   useEffect(() => {
     const handleScroll = () => {
@@ -36,11 +38,8 @@ function App() {
       <div className={`top-menu-bar ${isScrolled ? "scrolled" : ""}`}>
         {isScrolled && (
           <>
-            {/* Menu Button */}
-            <div className="menu-btn">
-              <div className="menu-line"></div>
-              <div className="menu-line"></div>
-            </div>
+            {/* Animated Menu Button */}
+            <MenuButton isOpen={isMenuOpen} toggleMenu={() => setIsMenuOpen(!isMenuOpen)} />
 
             {/* Sushruta Logo */}
             <img
@@ -53,7 +52,7 @@ function App() {
             <div className="signin-btn-container">
               {user ? (
                 <div className="user-info">
-                  <span className="username">Hello {user.displayName.split(" ")[0] || "User"}</span>
+                  <span className="username">Hello {user.displayName?.split(" ")[0] || "User"}</span>
                   <button className="signout-btn" onClick={() => signOut(auth)}>Sign Out</button>
                 </div>
               ) : (
@@ -63,6 +62,20 @@ function App() {
           </>
         )}
       </div>
+
+      {/* Floating Modal - Appears when MenuButton is clicked */}
+      {isMenuOpen && (
+        <div className="modal-overlay" onClick={() => setIsMenuOpen(false)}>
+          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+            <h1>Sushruta</h1>
+            <p>
+              This project brings cutting-edge heart disease prediction to your fingertips, delivering 97.55% accuracy using advanced Machine Learning and Deep Learning techniques. 
+              With automated feature selection (RFE & PCA) and a powerful hybrid model (ANN + Random Forest + Ensemble Learning), you can get fast, reliable predictions anytime, anywhere. 
+              This model brings you closer to cardiologist-level insights, empowering early detection and smarter healthcare decisions like never before. 🤍
+            </p>
+          </div>
+        </div>
+      )}
 
       {/* Sushruta Logo Initially Floating */}
       <img

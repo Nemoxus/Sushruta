@@ -387,3 +387,37 @@ body {
 }
 
 
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: black;
+  border: 2px solid white;
+  padding: 20px;
+  max-width: 600px;
+  text-align: center;
+  color: white;
+  border-radius: 10px;
+}
+
+.modal-content h1 {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.modal-content p {
+  text-align: justify;
+  font-size: 16px;
+  margin-top: 10px;
+  line-height: 1.5;
+}

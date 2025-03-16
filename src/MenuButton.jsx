@@ -1,14 +1,14 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 
-const MenuButton = () => {
+const MenuButton = ({ isOpen, toggleMenu }) => {
   return (
-    <StyledMenu>
+    <StyledMenu onClick={toggleMenu} className={isOpen ? "open" : ""}>
       <div className="bar"></div>
       <div className="bar"></div>
     </StyledMenu>
   );
-}
+};
 
 const StyledMenu = styled.div`
   display: flex;
@@ -16,20 +16,29 @@ const StyledMenu = styled.div`
   gap: 5px;
   cursor: pointer;
   position: absolute;
-  left: 20px; /* Aligns to the left side */
+  left: 20px;
   top: 50%;
   transform: translateY(-50%);
-  
+  width: 24px;
+  height: 20px;
+  justify-content: center;
+
   .bar {
-    width: 20px; /* Small horizontal lines */
-    height: 2px;
-    background-color: white; /* White color */
+    width: 24px;
+    height: 3px;
+    background-color: white;
     border-radius: 2px;
-    transition: 0.3s;
+    transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
   }
 
-  &:hover .bar {
-    background-color: #ddd; /* Lighten on hover */
+  &.open {
+    .bar:first-child {
+      transform: translateY(5px) rotate(43deg);
+    }
+
+    .bar:last-child {
+      transform: translateY(-4px) rotate(-43deg);
+    }
   }
 `;
 

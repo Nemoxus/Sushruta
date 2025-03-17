@@ -38,7 +38,7 @@ body {
   right: 0;
   top: 50%;
   transform: translateY(-50%);
-  width: 13px;
+  width: 15px;
   max-width: 85vw;
   height: 152px;
   overflow: hidden;
@@ -387,7 +387,7 @@ body {
 }
 
 
-.modal-overlay {
+.menu-modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
@@ -400,7 +400,7 @@ body {
   z-index: 1000;
 }
 
-.modal-content {
+.menu-modal-content {
   background: black;
   border: 2px solid white;
   padding: 20px;
@@ -410,14 +410,135 @@ body {
   border-radius: 10px;
 }
 
-.modal-content h1 {
+.menu-modal-content h1 {
   font-size: 24px;
   font-weight: bold;
 }
 
-.modal-content p {
+.menu-modal-content p {
   text-align: justify;
   font-size: 16px;
   margin-top: 10px;
   line-height: 1.5;
+}
+
+/* Close button (Cross) */
+.close-button {
+  position: absolute;
+  top: 1px;
+  right: 5px;
+  background: none;
+  border: none;
+  font-size: 24px;
+  color: #4118B2;
+  cursor: pointer;
+}
+
+.close-button:hover {
+  color: #ffffff;
+}
+
+/* Sign-in modal text */
+.sign-in-text {
+  color: white;
+  margin: 20px;
+  font-weight: bold;
+}
+
+/* Sign-in link */
+.sign-in-link {
+  color: #4118B2;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.sign-in-link:hover {
+  text-decoration: underline;
+}
+
+/* Terms & Conditions modal */
+.tos-modal h2 {
+  font-size: 1.5rem; /* Slightly larger for better readability */
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.tos-modal p {
+  text-align: justify;
+  margin-bottom: 12px;
+  line-height: 1.6; /* Improves readability */
+  font-size: 1rem;
+  padding: 0 10px; /* Adds spacing inside */
+}
+
+/* Centering the checkbox */
+.checkbox-container {
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Centers horizontally */
+  gap: 8px; /* Adds spacing between checkbox and label */
+  margin: 25px auto;
+}
+
+
+.checkbox-container input {
+  margin-right: 8px;
+}
+
+/* Next button */
+.next-button {
+  background-color: #4118B2;
+  color: white;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.next-button:hover {
+  background-color: #2e0e86;
+}
+
+.next-button:disabled {
+  background-color: #888;
+  cursor: not-allowed;
+}
+
+.sign-in-modal .floating-modal-content,
+.floating-modal-content.sign-in-size {
+  max-width: 350px; /* Smaller width for sign-in */
+}
+
+/* Floating modal container */
+.floating-modal-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 1001;
+}
+
+/* Floating modal content (default wide size) */
+.floating-modal-content {
+  position: relative;
+  background-color: black;
+  border: 2px solid white;
+  padding: 24px;
+  border-radius: 8px;
+  max-width: 600px; /* Wider by default for TOS */
+  width: 90%; /* Make it responsive */
+  text-align: center;
+}
+
+/* When checkup modal is open: Make top bar inaccessible */
+.floating-modal-open .top-menu-bar {
+  pointer-events: none;
+  opacity: 0.5; /* Reduce visibility */
 }

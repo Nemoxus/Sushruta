@@ -1,6 +1,5 @@
 import React from "react";
-import { auth } from "./firebaseConfig"; // Import Firebase Auth
-import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { signInWithGoogle } from "./firebaseConfig";
 import styled from "styled-components";
 
 const StyledWrapper = styled.div`
@@ -31,19 +30,9 @@ const StyledWrapper = styled.div`
 `;
 
 const SignInBtn = () => {
-  const handleSignIn = async () => {
-    try {
-      const provider = new GoogleAuthProvider();
-      await signInWithPopup(auth, provider);
-      console.log("User signed in successfully!");
-    } catch (error) {
-      console.error("Sign-in failed:", error.message);
-    }
-  };
-
   return (
     <StyledWrapper>
-      <button onClick={handleSignIn}>Sign In</button>
+      <button onClick={signInWithGoogle}>Sign In</button>
     </StyledWrapper>
   );
 };

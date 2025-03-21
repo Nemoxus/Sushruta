@@ -7,9 +7,10 @@ import SpotifyPlst from "./SpotifyPlst";
 import TextReveal from "./TextReveal";
 import CheckUpBtn from "./CheckUpBtn";
 import SignInBtn from "./SignInBtn";
+import Predict from "./Predict"; // Import Predict component
 import MenuButton from "./MenuButton"; // Animated menu button
 import CheckUpHandler from "./CheckUpHandler"; // Import new CheckUpHandler
-import ComingSoonPage from "./ComingSoonPage"; // Import Coming Soon page
+import InputDataPage from "./InputDataPage"; // Import Input Data Page
 
 function App() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -71,7 +72,7 @@ function App() {
                     <h1>Sushruta</h1>
                     <p>
                       This project brings cutting-edge heart disease prediction to your fingertips, delivering 97.55% accuracy using advanced Machine Learning and Deep Learning techniques. 
-                      With automated feature selection (RFE & PCA) and a powerful hybrid model (ANN + Random Forest + Ensemble Learning), you can get fast, reliable predictions anytime, anywhere. 
+                      With automated feature selection (RFE & PCA) and a powerful stacked emsemble model (SVM, XGBoost & Random Forest), you can get fast, reliable predictions anytime, anywhere. 
                       This model brings you closer to cardiologist-level insights, empowering early detection and smarter healthcare decisions like never before. 🤍
                     </p>
                   </div>
@@ -110,7 +111,8 @@ function App() {
         />
 
         {/* Coming Soon Page Route */}
-        <Route path="/coming-soon" element={<ComingSoonPage />} />
+        <Route path="/coming-soon" element={<InputDataPage />} />
+        <Route path="/predict" element={<Predict />} />
       </Routes>
     </Router>
   );

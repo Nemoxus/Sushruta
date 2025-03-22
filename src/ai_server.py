@@ -3,6 +3,7 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 import pickle
 import logging
+import os
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -10,6 +11,7 @@ logger = logging.getLogger(__name__)
 
 app = Flask(__name__)
 CORS(app)  # Enables CORS for all routes
+port = int(os.environ.get("PORT", 5000))  # Get Render's port, default to 5000
 
 # Load the trained model
 try:
@@ -58,4 +60,4 @@ def predict():
 
 if __name__ == "__main__":
     logger.info("Starting Flask server on port 5001")
-    app.run(debug=True, port=5001)
+    app.run(host="0.0.0.0", port=port)

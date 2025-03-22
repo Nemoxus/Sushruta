@@ -116,7 +116,7 @@ const CheckUpHandler = () => {
         if (!userData.tos_check) {
           setShowTosModal(true);
         } else {
-          window.open("/coming-soon", "_blank");
+          window.open("/input-data-form", "_blank");
         }
       } else {
         console.error("User document not found in database");
@@ -139,7 +139,7 @@ const CheckUpHandler = () => {
         await setDoc(userRef, { tos_check: true }, { merge: true });
 
         setShowTosModal(false);
-        window.open("/coming-soon", "_blank");
+        window.open("/input-data-form", "_blank");
       }
     } catch (error) {
       console.error("Error updating TOS acceptance:", error);

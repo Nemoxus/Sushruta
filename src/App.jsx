@@ -110,7 +110,7 @@ function App() {
           }
         />
 
-        {/* Coming Soon Page Route */}
+        {/* Input Form Data Page Route */}
         <Route path="/input-data-form" element={<InputDataPage />} />
         <Route path="/predict" element={<Predict />} />
       </Routes>

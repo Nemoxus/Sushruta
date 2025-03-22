@@ -111,7 +111,7 @@ function App() {
         />
 
         {/* Coming Soon Page Route */}
-        <Route path="/coming-soon" element={<InputDataPage />} />
+        <Route path="/input-data-form" element={<InputDataPage />} />
         <Route path="/predict" element={<Predict />} />
       </Routes>
     </Router>

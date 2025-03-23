@@ -11,6 +11,11 @@ logger = logging.getLogger(__name__)
 
 app = Flask(__name__)
 CORS(app)  # Enables CORS for all routes
+# Update CORS to specify your Vercel domain
+CORS(app, origins=["https://sushruta.vercel.app",
+                   "http://localhost:5173",
+                   "http://127.0.0.1:5173"],
+                   supports_credentials=True)
 port = int(os.environ.get("PORT", 5000))  # Get Render's port, default to 5000
 
 # Load the trained model
@@ -28,6 +33,10 @@ feature_mapping = {
     "maxHeartRate": "max heart rate",
     "oldPeak": "oldpeak"
 }
+
+@app.route("/", methods=["GET"])
+def home():
+    return jsonify({"status": "API is running"})
 
 @app.route("/predict", methods=["POST"])
 def predict():
@@ -59,5 +68,5 @@ def predict():
         return jsonify({"error": str(e)}), 500
 
 if __name__ == "__main__":
-    logger.info("Starting Flask server on port 5001")
+    logger.info(f"Starting Flask server on port {port}")
     app.run(host="0.0.0.0", port=port)

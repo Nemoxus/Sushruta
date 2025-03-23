@@ -15,7 +15,7 @@ port = int(os.environ.get("PORT", 5000))  # Get Render's port, default to 5000
 
 # Load the trained model
 try:
-    with open("stacking_model.pkl", "rb") as file:
+    with open("D:\RAJ\Project\sushruta\sushruta\src\stacking_model.pkl", "rb") as file:
         model = pickle.load(file)
     logger.info("Model loaded successfully")
 except Exception as e:

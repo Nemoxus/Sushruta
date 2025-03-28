@@ -150,7 +150,10 @@ const InputDataPage = () => {
         console.log("✅ Navigating to prediction page with result:", result.prediction);
         // Force navigation with state
         navigate("/predict", { 
-          state: { prediction: result.prediction },
+          state: {
+          prediction: result.prediction,
+          cholesterol: parseInt(formData.cholesterol),
+          },
           replace: true 
         });
       } else {

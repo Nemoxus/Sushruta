@@ -311,3 +311,11 @@ body {
   background-color: #4118B2;
 }
 
+
+.error-message {
+  color: red;
+  font-size: 0.8em;
+  display: block;
+  margin-top: 5px;
+  text-align: left;
+}

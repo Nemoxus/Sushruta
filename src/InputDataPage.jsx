@@ -22,6 +22,8 @@ const InputDataPage = () => {
     ca: "",
   });
 
+  const [errors, setErrors] = useState({});
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -34,16 +36,67 @@ const InputDataPage = () => {
     return () => unsubscribe();
   }, []);
 
+  const validateField = (name, value) => {
+    switch (name) {
+      case 'age':
+        return value === '' || (parseInt(value) >= 0 && parseInt(value) <= 100);
+      case 'oldPeak':
+        return value === '' || (parseFloat(value) >= 0 && parseFloat(value) <= 7);
+      case 'chestPain':
+        return value === '' || ['0', '1', '2', '3'].includes(value);
+      case 'exang':
+        return value === '' || ['0', '1'].includes(value);
+      case 'ca':
+        return value === '' || ['0', '1', '2', '3'].includes(value);
+      default:
+        return true;
+    }
+  };
+
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    
+    // Validate the input
+    if (validateField(name, value)) {
+      setFormData({ ...formData, [name]: value });
+      
+      // Clear any existing error for this field
+      if (errors[name]) {
+        setErrors(prev => {
+          const newErrors = {...prev};
+          delete newErrors[name];
+          return newErrors;
+        });
+      }
+    } else {
+      // Set an error for invalid input
+      setErrors(prev => ({
+        ...prev,
+        [name]: `Invalid ${name} value`
+      }));
+    }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log("🚀 Submitting form data:", formData);
 
+    // Validate all fields before submission
+    const newErrors = {};
+    Object.keys(formData).forEach(key => {
+      if (!validateField(key, formData[key])) {
+        newErrors[key] = `Invalid ${key} value`;
+      }
+    });
+
     if (Object.values(formData).some((value) => value.trim() === "")) {
       alert("⚠️ Please fill in all fields!");
+      return;
+    }
+
+    // If there are any validation errors, don't submit
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
       return;
     }
 
@@ -166,6 +219,7 @@ const InputDataPage = () => {
             className="input" 
           />
           <label className="user-label">Age</label>
+          {errors.age && <span className="error-message">{errors.age}</span>}
         </div>
         <div className="input-group">
           <input 
@@ -177,6 +231,7 @@ const InputDataPage = () => {
             className="input" 
           />
           <label className="user-label">Chest Pain (0/1/2/3)</label>
+          {errors.chestPain && <span className="error-message">{errors.chestPain}</span>}
         </div>
         <div className="input-group">
           <input 
@@ -221,6 +276,7 @@ const InputDataPage = () => {
             className="input" 
           />
           <label className="user-label">Exang (0/1)</label>
+          {errors.exang && <span className="error-message">{errors.exang}</span>}
         </div>
         <div className="input-group">
           <input 
@@ -233,6 +289,7 @@ const InputDataPage = () => {
             className="input" 
           />
           <label className="user-label">Oldpeak (ST Depression)</label>
+          {errors.oldPeak && <span className="error-message">{errors.oldPeak}</span>}
         </div>
         <div className="input-group">
           <input 
@@ -243,7 +300,8 @@ const InputDataPage = () => {
             required 
             className="input" 
           />
-          <label className="user-label">CA (Color of Arteries)</label>
+          <label className="user-label">CA (0/1/2/3)</label>
+          {errors.ca && <span className="error-message">{errors.ca}</span>}
         </div>
         <button type="submit" className="submit-btn">Submit</button>
       </form>

@@ -152,23 +152,104 @@ const InputDataPage = () => {
 
       {/* Health Data Form */}
       {showForm && (
-        <div className="input-modal-overlay">
-          <div className="input-modal-content">
-            <h1>Fill the health data form</h1>
-            <form onSubmit={handleSubmit}>
-              <input type="number" name="age" placeholder="Age" value={formData.age} onChange={handleChange} required />
-              <input type="number" name="chestPain" placeholder="Chest Pain (0/1/2/3)" value={formData.chestPain} onChange={handleChange} required />
-              <input type="number" name="cholesterol" placeholder="Cholesterol (mg/dL)" value={formData.cholesterol} onChange={handleChange} required />
-              <input type="number" name="fastingBloodSugar" placeholder="Fast Blood Sugar (mg/dL)" value={formData.fastingBloodSugar} onChange={handleChange} required />
-              <input type="number" name="maxHeartRate" placeholder="Max Heart Rate" value={formData.maxHeartRate} onChange={handleChange} required />
-              <input type="number" name="exang" placeholder="Exang (0/1)" value={formData.exang} onChange={handleChange} required />
-              <input type="number" name="oldPeak" placeholder="Oldpeak (ST Depression)" step="0.1" value={formData.oldPeak} onChange={handleChange} required />
-              <input type="number" name="ca" placeholder="CA (Color of Arteries)" value={formData.ca} onChange={handleChange} required />
-              <button type="submit" className="submit-btn">Submit</button>
-            </form>
-          </div>
+  <div className="input-modal-overlay">
+    <div className="input-modal-content">
+      <h1>Fill the health data form</h1>
+      <form onSubmit={handleSubmit}>
+        <div className="input-group">
+          <input 
+            type="number" 
+            name="age" 
+            value={formData.age} 
+            onChange={handleChange} 
+            required 
+            className="input" 
+          />
+          <label className="user-label">Age</label>
         </div>
-      )}
+        <div className="input-group">
+          <input 
+            type="number" 
+            name="chestPain" 
+            value={formData.chestPain} 
+            onChange={handleChange} 
+            required 
+            className="input" 
+          />
+          <label className="user-label">Chest Pain (0/1/2/3)</label>
+        </div>
+        <div className="input-group">
+          <input 
+            type="number" 
+            name="cholesterol" 
+            value={formData.cholesterol} 
+            onChange={handleChange} 
+            required 
+            className="input" 
+          />
+          <label className="user-label">Cholesterol (mg/dL)</label>
+        </div>
+        <div className="input-group">
+          <input 
+            type="number" 
+            name="fastingBloodSugar" 
+            value={formData.fastingBloodSugar} 
+            onChange={handleChange} 
+            required 
+            className="input" 
+          />
+          <label className="user-label">Fasting Blood Sugar (mg/dL)</label>
+        </div>
+        <div className="input-group">
+          <input 
+            type="number" 
+            name="maxHeartRate" 
+            value={formData.maxHeartRate} 
+            onChange={handleChange} 
+            required 
+            className="input" 
+          />
+          <label className="user-label">Max Heart Rate</label>
+        </div>
+        <div className="input-group">
+          <input 
+            type="number" 
+            name="exang" 
+            value={formData.exang} 
+            onChange={handleChange} 
+            required 
+            className="input" 
+          />
+          <label className="user-label">Exang (0/1)</label>
+        </div>
+        <div className="input-group">
+          <input 
+            type="number" 
+            name="oldPeak" 
+            step="0.1" 
+            value={formData.oldPeak} 
+            onChange={handleChange} 
+            required 
+            className="input" 
+          />
+          <label className="user-label">Oldpeak (ST Depression)</label>
+        </div>
+        <div className="input-group">
+          <input 
+            type="number" 
+            name="ca" 
+            value={formData.ca} 
+            onChange={handleChange} 
+            required 
+            className="input" 
+          />
+          <label className="user-label">CA (Color of Arteries)</label>
+        </div>
+        <button type="submit" className="submit-btn">Submit</button>
+      </form>
+    </div>
+  </div>
+)}
     </div>
   );
 };

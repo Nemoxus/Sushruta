@@ -168,6 +168,7 @@ body {
   align-items: center;
   justify-content: center;
   z-index: 1000;
+  overflow-y: auto;
 }
 
 /* 📌 Heading */
@@ -177,7 +178,6 @@ body {
   margin-bottom: 15px;
 }
 
-/* Remaining existing styles */
 .checkup-menu-modal-overlay {
   position: fixed;
   top: 0;
@@ -223,11 +223,25 @@ body {
   cursor: pointer;
 }
 
-
+/* Updated form layout to have more inputs per row */
 .input-modal-content form {
   display: grid;
-  grid-template-columns: 1fr 1fr; /* Two columns */
-  gap: 20px 15px; /* Vertical gap between rows, horizontal gap between columns */
+  grid-template-columns: repeat(4, 1fr); /* Four columns */
+  gap: 15px 15px; /* Vertical gap between rows, horizontal gap between columns */
+  padding: 5px;
+}
+
+.input-modal-content {
+  background: black;
+  border: 2px solid white;
+  padding: 25px;
+  max-width: 900px; /* Increased width to accommodate more columns */
+  width: 90%;
+  text-align: center;
+  color: white;
+  border-radius: 10px;
+  max-height: 90vh;
+  overflow-y: auto;
 }
 
 .input-modal-content .input-group {
@@ -240,7 +254,7 @@ body {
   border-radius: 1rem;
   background: none;
   padding: 1rem;
-  font-size: 1rem;
+  font-size: 0.9rem; /* Slightly smaller font */
   color: #f5f5f5;
   width: 100%;
   box-sizing: border-box;
@@ -255,6 +269,7 @@ body {
   transform: translateY(1rem);
   transition: 150ms cubic-bezier(0.4,0,0.2,1);
   background-color: transparent;
+  font-size: 0.9rem; /* Slightly smaller font */
 }
 
 .input-modal-content input:focus, 
@@ -273,24 +288,7 @@ body {
   left: 15px;
 }
 
-.input-modal-content {
-  background: black;
-  border: 2px solid white;
-  padding: 25px;
-  max-width: 600px; /* Increased width */
-  width: 90%;
-  text-align: center;
-  color: white;
-  border-radius: 10px;
-}
-
-/* Ensure full-width fields for specific inputs */
-.input-modal-content form div:nth-child(3),
-.input-modal-content form div:nth-child(4),
-.input-modal-content form div:last-child {
-  grid-column: 1 / -1; /* Full width */
-}
-
+/* Make submit button span all columns */
 .submit-btn {
   grid-column: 1 / -1; /* Submit button spans full width */
   justify-self: center;
@@ -304,13 +302,12 @@ body {
   font-size: 0.9em;
   cursor: pointer;
   transition: background 0.2s ease-in-out;
-  margin-top: 10px;
+  margin-top: 20px;
 }
 
 .submit-btn:hover {
   background-color: #4118B2;
 }
-
 
 .error-message {
   color: red;
@@ -318,4 +315,23 @@ body {
   display: block;
   margin-top: 5px;
   text-align: left;
+}
+
+/* Media queries for responsive layout */
+@media (max-width: 1200px) {
+  .input-modal-content form {
+    grid-template-columns: repeat(3, 1fr); /* Three columns on medium screens */
+  }
+}
+
+@media (max-width: 768px) {
+  .input-modal-content form {
+    grid-template-columns: repeat(2, 1fr); /* Two columns on smaller screens */
+  }
+}
+
+@media (max-width: 480px) {
+  .input-modal-content form {
+    grid-template-columns: 1fr; /* One column on mobile */
+  }
 }

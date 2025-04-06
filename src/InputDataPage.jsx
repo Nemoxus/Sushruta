@@ -49,26 +49,45 @@ const InputDataPage = () => {
   }, []);
 
   const validateField = (name, value) => {
+    // First check if the value is empty (which is allowed during typing)
+    if (value === '') return true;
+    
     switch (name) {
       case 'Age':
-        return value === '' || (parseFloat(value) >= 0 && parseFloat(value) <= 120);
+        return parseFloat(value) >= 0 && parseFloat(value) <= 120;
       case 'Gender':
-        return value === '' || ['0', '1'].includes(value);
+        return ['0', '1'].includes(value);
       case 'Blood_Pressure':
-        return value === '' || (parseFloat(value) >= 70 && parseFloat(value) <= 220);
+        // Fixed validation for Blood_Pressure
+        return parseFloat(value) >= 70 && parseFloat(value) <= 220;
+      case 'Cholesterol_Level':
+        // Added limits for Cholesterol_Level (130-300)
+        return parseFloat(value) >= 130 && parseFloat(value) <= 300;
       case 'BMI':
-        return value === '' || (parseFloat(value) >= 10 && parseFloat(value) <= 50);
+        return parseFloat(value) >= 10 && parseFloat(value) <= 50;
       case 'Sleep_Hours':
-        return value === '' || (parseFloat(value) >= 0 && parseFloat(value) <= 24);
+        return parseFloat(value) >= 0 && parseFloat(value) <= 24;
+      case 'Triglyceride_Level':
+        // Added limits for Triglyceride_Level (40-500)
+        return parseFloat(value) >= 40 && parseFloat(value) <= 500;
+      case 'Fasting_Blood_Sugar':
+        // Added limits for Fasting_Blood_Sugar (70-300)
+        return parseFloat(value) >= 70 && parseFloat(value) <= 300;
+      case 'CRP_Level':
+        // Added limits for CRP_Level (0-20)
+        return parseFloat(value) >= 0 && parseFloat(value) <= 20;
+      case 'Homocysteine_Level':
+        // Added limits for Homocysteine_Level (5-30)
+        return parseFloat(value) >= 5 && parseFloat(value) <= 30;
       case 'Alcohol_Consumption':
-        // Updated to allow values 0/1/2/3 (none/low/medium/high)
-        return value === '' || ['0', '1', '2', '3'].includes(value);
+        // Values 0/1/2/3 (none/low/medium/high)
+        return ['0', '1', '2', '3'].includes(value);
       case 'Sugar_Consumption':
-        // Updated to allow values 0/1/2 (low/medium/high)
-        return value === '' || ['0', '1', '2'].includes(value);
+        // Values 0/1/2 (low/medium/high)
+        return ['0', '1', '2'].includes(value);
       case 'Stress_Level':
-        // Updated to allow values 0 to 2
-        return value === '' || (parseInt(value) >= 0 && parseInt(value) <= 2);
+        // Values 0 to 2
+        return parseInt(value) >= 0 && parseInt(value) <= 2;
       case 'Exercise_Habits':
       case 'Smoking':
       case 'Family_Heart_Disease':
@@ -76,7 +95,7 @@ const InputDataPage = () => {
       case 'High_Blood_Pressure':
       case 'Low_HDL_Cholesterol':
       case 'High_LDL_Cholesterol':
-        return value === '' || ['0', '1'].includes(value);
+        return ['0', '1'].includes(value);
       default:
         return true;
     }
@@ -85,10 +104,16 @@ const InputDataPage = () => {
   const handleChange = (e) => {
     const { name, value } = e.target;
     
-    // Validate the input
-    if (validateField(name, value)) {
-      setFormData({ ...formData, [name]: value });
-      
+    // Always update the form data first
+    setFormData({ ...formData, [name]: value });
+    
+    // Then validate and set errors if needed
+    if (!validateField(name, value)) {
+      setErrors(prev => ({
+        ...prev,
+        [name]: `Invalid ${name.replace(/_/g, ' ')} value`
+      }));
+    } else {
       // Clear any existing error for this field
       if (errors[name]) {
         setErrors(prev => {
@@ -97,12 +122,6 @@ const InputDataPage = () => {
           return newErrors;
         });
       }
-    } else {
-      // Set an error for invalid input
-      setErrors(prev => ({
-        ...prev,
-        [name]: `Invalid ${name.replace(/_/g, ' ')} value`
-      }));
     }
   };
 
@@ -113,19 +132,17 @@ const InputDataPage = () => {
     // Validate all fields before submission
     const newErrors = {};
     Object.keys(formData).forEach(key => {
-      if (!validateField(key, formData[key])) {
+      if (formData[key].trim() === "") {
+        newErrors[key] = `${key.replace(/_/g, ' ')} is required`;
+      } else if (!validateField(key, formData[key])) {
         newErrors[key] = `Invalid ${key.replace(/_/g, ' ')} value`;
       }
     });
 
-    if (Object.values(formData).some((value) => value.trim() === "")) {
-      alert("⚠️ Please fill in all fields!");
-      return;
-    }
-
     // If there are any validation errors, don't submit
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
+      alert("⚠️ Please fix all errors before submitting!");
       return;
     }
 
@@ -273,7 +290,7 @@ const InputDataPage = () => {
                   required 
                   className="input" 
                 />
-                <label className="user-label">Age</label>
+                <label className="user-label">Age (0-120)</label>
                 {errors.Age && <span className="error-message">{errors.Age}</span>}
               </div>
               <div className="input-group">
@@ -298,7 +315,7 @@ const InputDataPage = () => {
                   required 
                   className="input" 
                 />
-                <label className="user-label">Blood Pressure (mmHg)</label>
+                <label className="user-label">Blood Pressure (70-220 mmHg)</label>
                 {errors.Blood_Pressure && <span className="error-message">{errors.Blood_Pressure}</span>}
               </div>
               <div className="input-group">
@@ -311,7 +328,7 @@ const InputDataPage = () => {
                   required 
                   className="input" 
                 />
-                <label className="user-label">Cholesterol Level (mg/dL)</label>
+                <label className="user-label">Cholesterol Level (130-300 mg/dL)</label>
                 {errors.Cholesterol_Level && <span className="error-message">{errors.Cholesterol_Level}</span>}
               </div>
               
@@ -376,7 +393,7 @@ const InputDataPage = () => {
                   required 
                   className="input" 
                 />
-                <label className="user-label">BMI</label>
+                <label className="user-label">BMI (10-50)</label>
                 {errors.BMI && <span className="error-message">{errors.BMI}</span>}
               </div>
               <div className="input-group">
@@ -451,7 +468,7 @@ const InputDataPage = () => {
                   required 
                   className="input" 
                 />
-                <label className="user-label">Sleep Hours</label>
+                <label className="user-label">Sleep Hours (0-24)</label>
                 {errors.Sleep_Hours && <span className="error-message">{errors.Sleep_Hours}</span>}
               </div>
               <div className="input-group">
@@ -478,7 +495,7 @@ const InputDataPage = () => {
                   required 
                   className="input" 
                 />
-                <label className="user-label">Triglyceride Level (mg/dL)</label>
+                <label className="user-label">Triglyceride (40-500 mg/dL)</label>
                 {errors.Triglyceride_Level && <span className="error-message">{errors.Triglyceride_Level}</span>}
               </div>
               <div className="input-group">
@@ -491,7 +508,7 @@ const InputDataPage = () => {
                   required 
                   className="input" 
                 />
-                <label className="user-label">Fasting Blood Sugar (mg/dL)</label>
+                <label className="user-label">Fasting Blood Sugar(70-300)</label>
                 {errors.Fasting_Blood_Sugar && <span className="error-message">{errors.Fasting_Blood_Sugar}</span>}
               </div>
               <div className="input-group">
@@ -504,7 +521,7 @@ const InputDataPage = () => {
                   required 
                   className="input" 
                 />
-                <label className="user-label">CRP Level (mg/L)</label>
+                <label className="user-label">CRP (0-20 mg/L)</label>
                 {errors.CRP_Level && <span className="error-message">{errors.CRP_Level}</span>}
               </div>
               <div className="input-group">
@@ -517,7 +534,7 @@ const InputDataPage = () => {
                   required 
                   className="input" 
                 />
-                <label className="user-label">Homocysteine Level (μmol/L)</label>
+                <label className="user-label">Homocysteine (5-30 μmol/L)</label>
                 {errors.Homocysteine_Level && <span className="error-message">{errors.Homocysteine_Level}</span>}
               </div>
               

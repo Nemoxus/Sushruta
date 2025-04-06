@@ -71,9 +71,12 @@ function App() {
                   <div className="menu-modal-content" onClick={(e) => e.stopPropagation()}>
                     <h1>Sushruta</h1>
                     <p>
-                      This project brings cutting-edge heart disease prediction to your fingertips, delivering 97.55% accuracy using advanced Machine Learning and Deep Learning techniques. 
-                      With automated feature selection (RFE & PCA) and a powerful stacked emsemble model (SVM, XGBoost & Random Forest), you can get fast, reliable predictions anytime, anywhere. 
-                      This model brings you closer to cardiologist-level insights, empowering early detection and smarter healthcare decisions like never before. 🤍
+                    This project brings accessible heart disease risk prediction to your fingertips,
+                    offering reliable results with around 81% accuracy. By analyzing basic health inputs,
+                    it provides fast and easy insights to support early detection and promote healthier
+                    decisions. While it uses advanced technology behind the scenes, it is not a
+                    replacement for medical professionals — rather, it’s a helpful tool designed
+                    to assist doctors and empower patients to take timely action for their heart health.🤍
                     </p>
                   </div>
                 </div>

@@ -315,7 +315,7 @@ const InputDataPage = () => {
                   required 
                   className="input" 
                 />
-                <label className="user-label">Blood Pressure (70-220 mmHg)</label>
+                <label className="user-label">BP (70-220 mmHg)</label>
                 {errors.Blood_Pressure && <span className="error-message">{errors.Blood_Pressure}</span>}
               </div>
               <div className="input-group">
@@ -328,7 +328,7 @@ const InputDataPage = () => {
                   required 
                   className="input" 
                 />
-                <label className="user-label">Cholesterol Level (130-300 mg/dL)</label>
+                <label className="user-label">Cholesterol (130-300 mg/dL)</label>
                 {errors.Cholesterol_Level && <span className="error-message">{errors.Cholesterol_Level}</span>}
               </div>
               

@@ -20,7 +20,7 @@ port = int(os.environ.get("PORT", 5000))  # Get Render's port, default to 5000
 
 # Load the new trained model
 try:
-    with open("heart_disease_rf_model.pkl", "rb") as file:
+    with open("rf_model.pkl", "rb") as file:
         model = pickle.load(file)
     logger.info("New random forest model loaded successfully")
 except Exception as e:
